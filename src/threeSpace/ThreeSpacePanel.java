@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import threeSpace.shape.RectanglePrism;
-import threeSpace.shape.Vertice;
+import threeSpace.shape.Vertex;
 
 @SuppressWarnings("serial")
 public class ThreeSpacePanel extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
@@ -36,16 +36,16 @@ public class ThreeSpacePanel extends JPanel implements ActionListener, MouseList
 		setBackground(Color.DARK_GRAY);
 		setForeground(Color.CYAN);
 
-		Vertice[] p = new Vertice[8];
-		p[0] = new Vertice(-50,-50,-50);
-		p[1] = new Vertice(-50,50,-50);
-		p[2] = new Vertice(-50,50,50);
-		p[3] = new Vertice(-50,-50,50);
+		Vertex[] p = new Vertex[8];
+		p[0] = new Vertex(-50,-50,-50);
+		p[1] = new Vertex(-50,50,-50);
+		p[2] = new Vertex(-50,50,50);
+		p[3] = new Vertex(-50,-50,50);
 
-		p[4] = new Vertice(50,-50,-50);
-		p[5] = new Vertice(50,50,-50);
-		p[6] = new Vertice(50,50,50);
-		p[7] = new Vertice(50,-50,50);
+		p[4] = new Vertex(50,-50,-50);
+		p[5] = new Vertex(50,50,-50);
+		p[6] = new Vertex(50,50,50);
+		p[7] = new Vertex(50,-50,50);
 
 		RectanglePrism r = new RectanglePrism(p);
 		
@@ -74,8 +74,8 @@ public class ThreeSpacePanel extends JPanel implements ActionListener, MouseList
 		repaint();
 	}
 	
-	Vertice l = new Vertice(200,0,0);
-	Vertice v = new Vertice(-1,0,0);
+	Vertex l = new Vertex(200,0,0);
+	Vertex v = new Vertex(-1,0,0);
 	
 	public void paint(Graphics g){
 		Graphics2D g2 = (Graphics2D) g;
@@ -104,7 +104,7 @@ public class ThreeSpacePanel extends JPanel implements ActionListener, MouseList
 		temp[0] = l.x + t*v.x;
 		temp[1] = l.y + t*v.y;
 		temp[2] = l.z + t*v.z;
-		Vertice fP = new Vertice (temp); //Focus point (center of focus plane)
+		Vertex fP = new Vertex (temp); //Focus point (center of focus plane)
 		
 		//Plane equation
 		double D = v.x*fP.x + v.y*fP.y + v.z*fP.z;
@@ -113,11 +113,11 @@ public class ThreeSpacePanel extends JPanel implements ActionListener, MouseList
 		
 		//Final point
 		RectanglePrism r = (RectanglePrism)s.get(0);
-		Vertice[] vs = r.getVertices();
+		Vertex[] vs = r.getVertices();
 		Point2D.Double[] twoD = new Point2D.Double[vs.length];
 		for(int i = 0; i < vs.length; i++){
-			Vertice a = vs[i];//point
-			Vertice b = new Vertice(a.x - l.x, a.y - l.y, a.z - l.z);//vector
+			Vertex a = vs[i];//point
+			Vertex b = new Vertex(a.x - l.x, a.y - l.y, a.z - l.z);//vector
 			
 //			System.out.println(a);
 //			System.out.println(b);

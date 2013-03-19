@@ -6,27 +6,27 @@ import java.awt.geom.PathIterator;
 
 import threeSpace.ThreeShape;
 
-public class Vertice implements ThreeShape {
+public class Vertex implements ThreeShape {
 	
-	public static final Vertice ORIGIN = new Vertice (0,0,0);
+	public static final Vertex ORIGIN = new Vertex (0,0,0);
 
 	public double x, y, z;
 
-	public Vertice(double[] loc) {
+	public Vertex(double[] loc) {
 		this(loc[0], loc[1], loc[2]);
 	}
 
-	public Vertice() {
+	public Vertex() {
 		this(0, 0, 0);
 	}
 
-	public Vertice(double x, double y, double z) {
+	public Vertex(double x, double y, double z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 	}
 
-	public double angleToX(Vertice origin) {
+	public double angleToX(Vertex origin) {
 		double y = this.y - origin.y;
 		double z = this.z - origin.z;
 		double r = Math.sqrt(y*y + z*z);
@@ -37,7 +37,7 @@ public class Vertice implements ThreeShape {
 		return angle;
 	}
 	
-	public double angleToY(Vertice origin) {
+	public double angleToY(Vertex origin) {
 		double x = this.x - origin.x;
 		double z = this.z - origin.z;
 		double r = Math.sqrt(x*x + z*z);
@@ -48,7 +48,7 @@ public class Vertice implements ThreeShape {
 		return angle;
 	}
 	
-	public double angleToZ(Vertice origin) {
+	public double angleToZ(Vertex origin) {
 		double y = this.y - origin.y;
 		double x = this.x - origin.x;
 		double r = Math.sqrt(y*y + x*x);
@@ -89,8 +89,8 @@ public class Vertice implements ThreeShape {
 
 	@Override
 	public boolean equals(Object v) {
-		if (v instanceof Vertice) {
-			Vertice v2 = (Vertice) v;
+		if (v instanceof Vertex) {
+			Vertex v2 = (Vertex) v;
 			return v2.x == x && v2.y == y && v2.z == z;
 		}
 		return false;
@@ -103,7 +103,7 @@ public class Vertice implements ThreeShape {
 	}
 
 	@Override
-	public boolean contains(Vertice p) {
+	public boolean contains(Vertex p) {
 		return this.equals(p);
 	}
 
@@ -122,7 +122,7 @@ public class Vertice implements ThreeShape {
 		rotateZ(t, ORIGIN);
 	}
 	
-	public void rotateX(double t, Vertice origin){
+	public void rotateX(double t, Vertex origin){
 		double oldY = this.y - origin.y;
 		double oldZ = this.z - origin.z;
 		double r = Math.sqrt(oldY*oldY + oldZ*oldZ);
@@ -132,7 +132,7 @@ public class Vertice implements ThreeShape {
 		this.z = Math.sin(oldAngle + t)*r + origin.z;
 	}
 	
-	public void rotateY(double t, Vertice origin){
+	public void rotateY(double t, Vertex origin){
 		double oldX = this.x - origin.x;
 		double oldZ = this.z - origin.z;
 		double r = Math.sqrt(oldX*oldX + oldZ*oldZ);
@@ -142,7 +142,7 @@ public class Vertice implements ThreeShape {
 		this.z = Math.sin(oldAngle + t)*r + origin.z;
 	}
 	
-	public void rotateZ(double t, Vertice origin){
+	public void rotateZ(double t, Vertex origin){
 		double oldX = this.x - origin.x;
 		double oldY = this.y - origin.y;
 		double r = Math.sqrt(oldY*oldY + oldX*oldX);

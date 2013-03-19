@@ -14,7 +14,7 @@ public interface ThreeShape{
 
 	public abstract boolean contains(double x, double y, double z);
 
-	public abstract boolean contains(Vertice p);
+	public abstract boolean contains(Vertex p);
 	
 	public abstract void rotateX(double theta);
 	public abstract void rotateY(double theta);

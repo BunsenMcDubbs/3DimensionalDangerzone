@@ -15,10 +15,10 @@ import threeSpace.ThreeShape;
 
 public class RectanglePrism implements ThreeShape {
 	
-	private Vertice[] v;
+	private Vertex[] v;
 	double x, y, z;
 	
-	public RectanglePrism (Vertice[] s){
+	public RectanglePrism (Vertex[] s){
 		setVertices(s);
 		assert(getVertices().length == 8);
 	}
@@ -37,7 +37,7 @@ public class RectanglePrism implements ThreeShape {
 			g.drawLine((int)v[i].y, (int)v[i].z, (int)v[i+4].y, (int)v[i+4].z);
 		}
 		
-		for(Vertice p:v){
+		for(Vertex p:v){
 			if (p.x > 0) g.setColor(Color.white);
 			else g.setColor(Color.black);
 			g.fillOval((int)p.y-4, (int)p.z-4, 8, 8);
@@ -46,50 +46,50 @@ public class RectanglePrism implements ThreeShape {
 	}
 	
 	@Override
-	public boolean contains(Vertice p) {
+	public boolean contains(Vertex p) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean contains(double x, double y, double z) {
-		return contains(new Vertice(x,y,z));
+		return contains(new Vertex(x,y,z));
 	}
 	
 
-	public Vertice[] getVertices() {
+	public Vertex[] getVertices() {
 		return v;
 	}
 
-	public void setVertices(Vertice[] v) {
+	public void setVertices(Vertex[] v) {
 		this.v = v;
 	}
 	
-	public Vertice getCenter(){
+	public Vertex getCenter(){
 		double x = 0, y = 0, z = 0;
 		for(int i = 0; i < v.length; i++){
 			x += v[i].x;
 			y += v[i].y;
 			z += v[i].z;
 		}
-		return new Vertice (x/v.length, y/v.length, z/v.length);
+		return new Vertex (x/v.length, y/v.length, z/v.length);
 	}
 	
 	@Override
 	public void rotateX(double theta) {
-		for(Vertice vs : v)
+		for(Vertex vs : v)
 			vs.rotateX(theta);
 	}
 
 	@Override
 	public void rotateY(double theta) {
-		for(Vertice vs : v)
+		for(Vertex vs : v)
 			vs.rotateY(theta);		
 	}
 
 	@Override
 	public void rotateZ(double theta) {
-		for(Vertice vs : v)
+		for(Vertex vs : v)
 			vs.rotateZ(theta);
 	}
 
