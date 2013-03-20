@@ -72,12 +72,13 @@ MouseListener, MouseMotionListener, KeyListener {
 			case 1: ts.rotateX(angle); break;
 			case 2: ts.rotateY(angle); break;
 			case 3: ts.rotateZ(angle); break;
+//			case 4: ts.rotateX(angle); ts.rotateY(angle); break;
 			}
 		}
 		repaint();
 	}
 	
-	Vertex l = new Vertex(200,0,0); //camera's position
+	Vertex l = new Vertex(450,0,0); //camera's position
 	Vertex v = new Vertex(-1,0,0);
 	
 	public void paint(Graphics g){
@@ -90,8 +91,7 @@ MouseListener, MouseMotionListener, KeyListener {
 
 //		g2.drawLine(getWidth()/2, 0, getWidth()/2, getHeight());
 //		g2.drawLine(0, getHeight()/2, getWidth(), getHeight()/2);
-		g2.fill(new Ellipse2D.Double(-4,-4,8,8));
-		
+
 		perspectivePaint(g2);
 
 //		s.get(0).paint(g2);
@@ -104,7 +104,7 @@ MouseListener, MouseMotionListener, KeyListener {
 		//Perspective
 		
 		//focus point
-		double t = 250;
+		double t = 450;
 		double[] temp = new double [3];
 		temp[0] = l.x + t*v.x;
 		temp[1] = l.y + t*v.y;
@@ -131,10 +131,11 @@ MouseListener, MouseMotionListener, KeyListener {
 //			System.out.println(b);
 			
 			double t2 = (D - (A*a.x + B*a.y + C*a.z))/(A*b.x + B*b.y + C*b.z);
-			twoD[i] = new Point2D.Double(a.y + b.y*t2, a.z + b.z*t2);
+			twoD[i] = new Point2D.Double(a.y + b.y*t2, -(a.z + b.z*t2));
 //			System.out.println(t2);
 		}
 		r.perspectivePoint(g2, twoD);
+//		r.paint(g2);
 	}
 
 	@Override
@@ -186,7 +187,7 @@ MouseListener, MouseMotionListener, KeyListener {
 			int cx = e.getX();
 			int cy = e.getY();
 			for(ThreeShape ts:s){
-				ts.rotateZ(-(double)(x-cx)*0.01);
+				ts.rotateZ((double)(x-cx)*0.01);
 				ts.rotateY(-(double)(y-cy)*0.01);
 			}
 			x = cx;
@@ -209,22 +210,22 @@ MouseListener, MouseMotionListener, KeyListener {
 //		case KeyEvent.VK_LEFT: v.rotateZ(-angle, l); break;
 //		}
 		
-//		double shift = 5;
-//		switch(e.getKeyCode()){
-//		case KeyEvent.VK_UP: l.z += shift; break;
-//		case KeyEvent.VK_DOWN: l.z -= shift; break;
-//		case KeyEvent.VK_RIGHT: l.y += shift; break;
-//		case KeyEvent.VK_LEFT: l.y -= shift; break;
-//		}
-		
-		RectanglePrism r = (RectanglePrism) s.get(0);
 		double shift = 5;
 		switch(e.getKeyCode()){
-		case KeyEvent.VK_UP: r.shiftZ(shift); break;
-		case KeyEvent.VK_DOWN: r.shiftZ(-shift); break;
-		case KeyEvent.VK_RIGHT: r.shiftY(shift); break;
-		case KeyEvent.VK_LEFT: r.shiftY(-shift); break;
+		case KeyEvent.VK_UP: l.z += shift; break;
+		case KeyEvent.VK_DOWN: l.z -= shift; break;
+		case KeyEvent.VK_RIGHT: l.y += shift; break;
+		case KeyEvent.VK_LEFT: l.y -= shift; break;
 		}
+		
+//		RectanglePrism r = (RectanglePrism) s.get(0);
+//		double shift = 5;
+//		switch(e.getKeyCode()){
+//		case KeyEvent.VK_UP: r.shiftZ(shift); break;
+//		case KeyEvent.VK_DOWN: r.shiftZ(-shift); break;
+//		case KeyEvent.VK_RIGHT: r.shiftY(shift); break;
+//		case KeyEvent.VK_LEFT: r.shiftY(-shift); break;
+//		}
 		
 		repaint();
 		
