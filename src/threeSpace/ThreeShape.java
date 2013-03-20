@@ -19,6 +19,10 @@ public interface ThreeShape{
 	public abstract void rotateX(double theta);
 	public abstract void rotateY(double theta);
 	public abstract void rotateZ(double theta);
+	public abstract void rotateX(double theta, Vertex origin);
+	public abstract void rotateY(double theta, Vertex origin);
+	public abstract void rotateZ(double theta, Vertex origin);
+	
 	
 	public abstract void paint(Graphics2D g);
 	

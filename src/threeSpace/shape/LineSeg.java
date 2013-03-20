@@ -54,6 +54,24 @@ public class LineSeg implements ThreeShape{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void rotateX(double theta, Vertex origin) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void rotateY(double theta, Vertex origin) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void rotateZ(double theta, Vertex origin) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

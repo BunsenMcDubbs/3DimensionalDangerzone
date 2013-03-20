@@ -26,6 +26,7 @@ public class UniverseFrame extends JFrame{
 		setSize();
 		this.addMouseListener(ts);
 		this.addMouseMotionListener(ts);
+		this.addKeyListener(ts);
 //		setBackground(bg);
 	}
 	

@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -21,7 +23,8 @@ import threeSpace.shape.RectanglePrism;
 import threeSpace.shape.Vertex;
 
 @SuppressWarnings("serial")
-public class ThreeSpacePanel extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
+public class ThreeSpacePanel extends JPanel implements ActionListener, 
+MouseListener, MouseMotionListener, KeyListener {
 
 	double angle;
 	Timer t;
@@ -74,7 +77,7 @@ public class ThreeSpacePanel extends JPanel implements ActionListener, MouseList
 		repaint();
 	}
 	
-	Vertex l = new Vertex(200,0,0);
+	Vertex l = new Vertex(200,0,0); //camera's position
 	Vertex v = new Vertex(-1,0,0);
 	
 	public void paint(Graphics g){
@@ -83,29 +86,33 @@ public class ThreeSpacePanel extends JPanel implements ActionListener, MouseList
 		super.paint(g);
 
 		g2.setColor(getForeground());
+		g2.translate(getWidth()/2, getHeight()/2);
 
 //		g2.drawLine(getWidth()/2, 0, getWidth()/2, getHeight());
 //		g2.drawLine(0, getHeight()/2, getWidth(), getHeight()/2);
-
-		g2.translate(getWidth()/2, getHeight()/2);
-
-//		g2.fill(new Ellipse2D.Float(-5, -5, 10, 10)); //centerPoint
+		g2.fill(new Ellipse2D.Double(-4,-4,8,8));
 		
-		//Orthagonal
-//		for(ThreeShape ts:s){
-//			ts.paint(g2);
-//		}
+		perspectivePaint(g2);
+
+//		s.get(0).paint(g2);
+	}
+	
+	public void perspectivePaint(Graphics2D g2){
+		
+		g2.setColor(getForeground());
 		
 		//Perspective
 		
 		//focus point
-		double t = 200;
+		double t = 250;
 		double[] temp = new double [3];
 		temp[0] = l.x + t*v.x;
 		temp[1] = l.y + t*v.y;
 		temp[2] = l.z + t*v.z;
 		Vertex fP = new Vertex (temp); //Focus point (center of focus plane)
 		
+		g2.translate(fP.y, fP.z);
+
 		//Plane equation
 		double D = v.x*fP.x + v.y*fP.y + v.z*fP.z;
 //		System.out.println(D);
@@ -113,6 +120,7 @@ public class ThreeSpacePanel extends JPanel implements ActionListener, MouseList
 		
 		//Final point
 		RectanglePrism r = (RectanglePrism)s.get(0);
+		
 		Vertex[] vs = r.getVertices();
 		Point2D.Double[] twoD = new Point2D.Double[vs.length];
 		for(int i = 0; i < vs.length; i++){
@@ -188,7 +196,49 @@ public class ThreeSpacePanel extends JPanel implements ActionListener, MouseList
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent e) {
+	public void mouseMoved(MouseEvent e){}
 
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+//		double angle = .01;
+//		switch(e.getKeyCode()){
+//		case KeyEvent.VK_UP: v.rotateY(angle, l); break;
+//		case KeyEvent.VK_DOWN: v.rotateY(-angle, l); break;
+//		case KeyEvent.VK_RIGHT: v.rotateZ(angle, l); break;
+//		case KeyEvent.VK_LEFT: v.rotateZ(-angle, l); break;
+//		}
+		
+//		double shift = 5;
+//		switch(e.getKeyCode()){
+//		case KeyEvent.VK_UP: l.z += shift; break;
+//		case KeyEvent.VK_DOWN: l.z -= shift; break;
+//		case KeyEvent.VK_RIGHT: l.y += shift; break;
+//		case KeyEvent.VK_LEFT: l.y -= shift; break;
+//		}
+		
+		RectanglePrism r = (RectanglePrism) s.get(0);
+		double shift = 5;
+		switch(e.getKeyCode()){
+		case KeyEvent.VK_UP: r.shiftZ(shift); break;
+		case KeyEvent.VK_DOWN: r.shiftZ(-shift); break;
+		case KeyEvent.VK_RIGHT: r.shiftY(shift); break;
+		case KeyEvent.VK_LEFT: r.shiftY(-shift); break;
+		}
+		
+		repaint();
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }

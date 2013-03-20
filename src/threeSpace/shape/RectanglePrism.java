@@ -16,7 +16,6 @@ import threeSpace.ThreeShape;
 public class RectanglePrism implements ThreeShape {
 	
 	private Vertex[] v;
-	double x, y, z;
 	
 	public RectanglePrism (Vertex[] s){
 		setVertices(s);
@@ -24,6 +23,8 @@ public class RectanglePrism implements ThreeShape {
 	}
 	
 	public void paint(Graphics2D g){
+		
+		g.setColor(Color.cyan);
 		
 		for(int i = 0; i < 3; i++){
 			g.drawLine((int)v[i].y, (int)v[i].z, (int)v[i+1].y, (int)v[i+1].z);
@@ -40,7 +41,7 @@ public class RectanglePrism implements ThreeShape {
 		for(Vertex p:v){
 			if (p.x > 0) g.setColor(Color.white);
 			else g.setColor(Color.black);
-			g.fillOval((int)p.y-4, (int)p.z-4, 8, 8);
+			g.fillOval((int)p.y-3, (int)p.z-3, 6, 6);
 		}
 		
 	}
@@ -77,20 +78,69 @@ public class RectanglePrism implements ThreeShape {
 	
 	@Override
 	public void rotateX(double theta) {
+//		Vertex center = getCenter();
 		for(Vertex vs : v)
+//			vs.rotateX(theta, center);
 			vs.rotateX(theta);
 	}
 
 	@Override
 	public void rotateY(double theta) {
+//		Vertex center = getCenter();
 		for(Vertex vs : v)
-			vs.rotateY(theta);		
+//			vs.rotateY(theta, center);
+			vs.rotateY(theta);
+
 	}
 
 	@Override
 	public void rotateZ(double theta) {
+//		Vertex center = getCenter();
 		for(Vertex vs : v)
+//			vs.rotateZ(theta, center);
 			vs.rotateZ(theta);
+
+	}
+	
+	@Override
+	public void rotateX(double theta, Vertex origin) {
+		for(Vertex vs : v)
+			vs.rotateX(theta, origin);
+	}
+
+	@Override
+	public void rotateY(double theta, Vertex origin) {
+		for(Vertex vs : v)
+			vs.rotateY(theta, origin);
+	}
+	
+	@Override
+	public void rotateZ(double theta, Vertex origin) {
+		for(Vertex vs : v)
+			vs.rotateZ(theta, origin);
+	}
+	
+	public Vertex shift(Vertex s){
+		
+		for(Vertex a:v){
+			a.x += s.x;
+			a.y += s.y;
+			a.z += s.z;
+		}
+		
+		return getCenter();
+	}
+	
+	public Vertex shiftX(double t){
+		return shift(new Vertex(t,0,0));
+	}
+	
+	public Vertex shiftY(double t){
+		return shift(new Vertex(0,t,0));
+	}
+	
+	public Vertex shiftZ(double t){
+		return shift(new Vertex(0,0,t));
 	}
 
 	public void perspectivePoint(Graphics2D g, Double[] a) {
