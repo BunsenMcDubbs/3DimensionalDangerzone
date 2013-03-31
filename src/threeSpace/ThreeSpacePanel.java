@@ -78,7 +78,7 @@ MouseListener, MouseMotionListener, KeyListener {
 		repaint();
 	}
 	
-	Vertex l = new Vertex(450,0,0); //camera's position
+	Vertex l = new Vertex(750,0,0); //camera's position
 	Vertex v = new Vertex(-1,0,0);
 	
 	public void paint(Graphics g){
@@ -104,7 +104,7 @@ MouseListener, MouseMotionListener, KeyListener {
 		//Perspective
 		
 		//focus point
-		double t = 450;
+		double t = 1000;
 		double[] temp = new double [3];
 		temp[0] = l.x + t*v.x;
 		temp[1] = l.y + t*v.y;
@@ -122,7 +122,7 @@ MouseListener, MouseMotionListener, KeyListener {
 		RectanglePrism r = (RectanglePrism)s.get(0);
 		
 		Vertex[] vs = r.getVertices();
-		Point2D.Double[] twoD = new Point2D.Double[vs.length];
+		Point2D.Double[] twoD = new Point2D.Double[vs.length +1];
 		for(int i = 0; i < vs.length; i++){
 			Vertex a = vs[i];//point
 			Vertex b = new Vertex(a.x - l.x, a.y - l.y, a.z - l.z);//vector
@@ -134,6 +134,17 @@ MouseListener, MouseMotionListener, KeyListener {
 			twoD[i] = new Point2D.Double(a.y + b.y*t2, -(a.z + b.z*t2));
 //			System.out.println(t2);
 		}
+		
+		Vertex a = r.getCenter();//point
+		Vertex b = new Vertex(a.x - l.x, a.y - l.y, a.z - l.z);//vector
+		
+//		System.out.println(a);
+//		System.out.println(b);
+		
+		double t2 = (D - (A*a.x + B*a.y + C*a.z))/(A*b.x + B*b.y + C*b.z);
+		twoD[8] = new Point2D.Double(a.y + b.y*t2, -(a.z + b.z*t2));
+//		System.out.println(t2);
+		
 		r.perspectivePoint(g2, twoD);
 //		r.paint(g2);
 	}
@@ -187,8 +198,8 @@ MouseListener, MouseMotionListener, KeyListener {
 			int cx = e.getX();
 			int cy = e.getY();
 			for(ThreeShape ts:s){
-				ts.rotateZ((double)(x-cx)*0.01);
-				ts.rotateY(-(double)(y-cy)*0.01);
+				ts.rotateZ(-(double)(x-cx)*0.01);
+				ts.rotateY((double)(y-cy)*0.01);
 			}
 			x = cx;
 			y = cy;
@@ -232,14 +243,12 @@ MouseListener, MouseMotionListener, KeyListener {
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
+	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void keyTyped(KeyEvent e) {
 	}
 }

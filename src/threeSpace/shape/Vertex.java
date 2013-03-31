@@ -125,31 +125,22 @@ public class Vertex implements ThreeShape {
 	public void rotateX(double t, Vertex origin){
 		double oldY = this.y - origin.y;
 		double oldZ = this.z - origin.z;
-		double r = Math.sqrt(oldY*oldY + oldZ*oldZ);
-		double oldAngle = this.angleToX();
-		
-		this.y = Math.cos(oldAngle + t)*r + origin.y;
-		this.z = Math.sin(oldAngle + t)*r + origin.z;
+		this.y = oldY * Math.cos(t) - oldZ * Math.sin(t) + origin.y;
+		this.z = oldY * Math.sin(t) + oldZ * Math.cos(t) + origin.z;
 	}
 	
 	public void rotateY(double t, Vertex origin){
 		double oldX = this.x - origin.x;
 		double oldZ = this.z - origin.z;
-		double r = Math.sqrt(oldX*oldX + oldZ*oldZ);
-		double oldAngle = this.angleToY();
-		
-		this.x = Math.cos(oldAngle + t)*r + origin.x;
-		this.z = Math.sin(oldAngle + t)*r + origin.z;
+		this.x = oldX * Math.cos(t) - oldZ * Math.sin(t) + origin.x;
+		this.z = oldX * Math.sin(t) + oldZ * Math.cos(t) + origin.z;
 	}
 	
 	public void rotateZ(double t, Vertex origin){
 		double oldX = this.x - origin.x;
 		double oldY = this.y - origin.y;
-		double r = Math.sqrt(oldY*oldY + oldX*oldX);
-		double oldAngle = this.angleToZ();
-		
-		this.x = Math.cos(oldAngle + t)*r + origin.x;
-		this.y = Math.sin(oldAngle + t)*r + origin.y;
+		this.x = oldX * Math.cos(t) - oldY * Math.sin(t) + origin.x;
+		this.y = oldX * Math.sin(t) + oldY * Math.cos(t) + origin.y;
 	}
 
 	@Override

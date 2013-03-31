@@ -144,14 +144,17 @@ public class RectanglePrism implements ThreeShape {
 	}
 
 	public void perspectivePoint(Graphics2D g, Double[] a) {
+		g.setColor(Color.cyan);
 		for(int i = 0; i < 3; i++){
 			g.drawLine((int)a[i].x, (int)a[i].y, (int)a[i+1].x, (int)a[i+1].y);
 		}
 		g.drawLine((int)a[3].x, (int)a[3].y, (int)a[0].x, (int)a[0].y);
+		g.setColor(Color.magenta);
 		for(int i = 4; i < 7; i++){
 			g.drawLine((int)a[i].x, (int)a[i].y, (int)a[i+1].x, (int)a[i+1].y);
 		}
 		g.drawLine((int)a[7].x, (int)a[7].y, (int)a[4].x, (int)a[4].y);
+		g.setColor(Color.pink);
 		for(int i = 0; i < 4; i++){
 			g.drawLine((int)a[i].x, (int)a[i].y, (int)a[i+4].x, (int)a[i+4].y);
 		}
