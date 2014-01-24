@@ -1,6 +1,9 @@
 3DimensionalDangerzone
 ======================
-TO RUN: run the UniverseFrame main
+
+3D Demo - Cube rotating in space
+
+TO RUN: run the UniverseFrame main method
 
 Click to start and stop continuous rotation (cycles through modes)
 Click and drag to rotate by yourself (only rotates on Y and Z axis for mouse movement)
